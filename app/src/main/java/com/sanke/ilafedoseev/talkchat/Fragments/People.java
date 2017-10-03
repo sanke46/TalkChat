@@ -42,13 +42,14 @@ public class People extends Fragment {
         arr.add(new User(1,"Светлов Евгений","asdfasdf12","example@gmail.com",true));
         arr.add(new User(2,"Федосеев Илья","asdfasdf12","example@gmail.com",true));
         arr.add(new User(3,"Анна Лазаренко","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(1,"Светлов Евгений","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(2,"Федосеев Илья","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(3,"Анна Лазаренко","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(1,"Светлов Евгений","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(2,"Федосеев Илья","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(3,"Анна Лазаренко","asdfasdf12","example@gmail.com",true));
         return arr;
+    }
+
+    public class chatCreat implements View.OnClickListener {
+        @Override
+        public void onClick(final View v) {
+
+        }
     }
 
 }

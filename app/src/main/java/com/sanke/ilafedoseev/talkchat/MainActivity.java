@@ -1,5 +1,6 @@
 package com.sanke.ilafedoseev.talkchat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,12 +11,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sanke.ilafedoseev.talkchat.Adapter.FragmentPageAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +49,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.allPeople);
 
-        // Construct the data source
-//        ArrayList<User> arrayOfUsers = new ArrayList<User>();
-//        arrayOfUsers.add(new User("Светлов Евгений","asdfasdf12","example@gmail.com",true));
-//        arrayOfUsers.add(new User("Федосеев Илья","asdfasdf12","example@gmail.com",true));
-//        arrayOfUsers.add(new User("Анна Лазаренко","asdfasdf12","example@gmail.com",true));
-//        FriendListAdapter adapter = new FriendListAdapter(this, arrayOfUsers);
-//        ListView listView = (ListView) findViewById(R.id.list_view);
-//        listView.setAdapter(adapter);
+        if (FirebaseAuth.getInstance() == null) {
+            Log.d(TAG, "No user is logged in");
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+            finish();
+        } else {
+            Log.d(TAG, "User is already logged in");
+        }
+
+
     }
 
     @Override
@@ -94,7 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -102,11 +111,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
