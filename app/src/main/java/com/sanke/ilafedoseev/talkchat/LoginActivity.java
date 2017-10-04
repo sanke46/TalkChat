@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final String TAG = "LoginActivity";
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    public FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
 
     private EditText emailUser;
     private EditText passwodUser;
@@ -40,32 +40,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login_activity);
 
         mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            finish();
+            Log.v(TAG,"** USER arleady login **");
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "No user is logged in");
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "User is already logged in");
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
-
-        if (mAuth == null) {
-            Log.d(TAG, "No user is logged in");
-        } else {
-            Log.d(TAG, "User is already logged in");
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
 
         emailUser = (EditText) findViewById(R.id.userEmail);
         passwodUser = (EditText) findViewById(R.id.userPassword);
@@ -77,14 +71,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnLogin) {
             singIn(emailUser.getText().toString(), passwodUser.getText().toString());
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
         } else if (view.getId() == R.id.btnRegistration) {
-            reaistration(emailUser.getText().toString(), passwodUser.getText().toString());
+            registration(emailUser.getText().toString(), passwodUser.getText().toString());
         }
     }
 
@@ -94,6 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Login complete", Toast.LENGTH_LONG).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
                     Toast.makeText(LoginActivity.this, "Login is fail, try again", Toast.LENGTH_LONG).show();
                 }
@@ -101,12 +108,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void reaistration(String email, String password) {
+    public void registration(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Registration complete", Toast.LENGTH_LONG).show();
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
                     Toast.makeText(LoginActivity.this, "Registration is fail, try again", Toast.LENGTH_LONG).show();
                 }

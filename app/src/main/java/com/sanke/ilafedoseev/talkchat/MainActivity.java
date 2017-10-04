@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +20,7 @@ import com.sanke.ilafedoseev.talkchat.Adapter.FragmentPageAdapter;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +46,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.allPeople);
-
-        if (FirebaseAuth.getInstance() == null) {
-            Log.d(TAG, "No user is logged in");
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
+//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.allPeople);
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            Log.v(TAG,"** USER not arleady login **");
             finish();
+           startActivity(new Intent(this, LoginActivity.class));
         } else {
-            Log.d(TAG, "User is already logged in");
+            Log.v(TAG,"** USER arleady login **");
         }
-
-
     }
 
     @Override
@@ -112,9 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_send) {
             FirebaseAuth.getInstance().signOut();
+            finish();
             Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
-            finish();
+            Log.v(TAG, "**User logOut**");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
