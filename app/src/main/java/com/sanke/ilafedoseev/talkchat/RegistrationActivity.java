@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,25 +19,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- * Created by ilafedoseev on 03/10/2017.
+ * Created by ilafedoseev on 04/10/2017.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "RegistrationActivity";
 
     public FirebaseAuth mAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
 
-    private EditText emailUser;
-    private EditText passwodUser;
-    private Button btnLogin;
-    private TextView btnRegistration;
+    private EditText newUserEmail;
+    private EditText newUserPassword;
+    private Button btnCreateAccount;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.registration_activity);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -62,41 +60,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        emailUser = (EditText) findViewById(R.id.userEmail);
-        passwodUser = (EditText) findViewById(R.id.userPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnRegistration = (TextView) findViewById(R.id.btnRegistration);
+        newUserEmail = (EditText) findViewById(R.id.newUserEmail);
+        newUserPassword = (EditText) findViewById(R.id.newUserPassword);
+        btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
 
-        btnLogin.setOnClickListener(this);
-        btnRegistration.setOnClickListener(this);
+        btnCreateAccount.setOnClickListener(this);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnLogin) {
-            singIn(emailUser.getText().toString(), passwodUser.getText().toString());
-        } else {
-            startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+        if (view.getId() == R.id.btnRegistration) {
+            registration(newUserEmail.getText().toString(), newUserPassword.getText().toString());
         }
+
     }
 
-    public void singIn(String email, String password) {
-        email = emailUser.getText().toString().trim();
-        password  = passwodUser.getText().toString().trim();
+    public void registration(String email, String password) {
+        email = newUserEmail.getText().toString().trim();
+        password  = newUserPassword.getText().toString().trim();
 
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
@@ -109,19 +91,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login complete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
-                    if(true) {
-                        Toast.makeText(LoginActivity.this, "Login is fail, try again", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Please enter email or password", Toast.LENGTH_SHORT);
-                    }
+                    Toast.makeText(RegistrationActivity.this, "Registration is fail, try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
