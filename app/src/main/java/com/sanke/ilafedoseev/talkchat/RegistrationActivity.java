@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * Created by ilafedoseev on 04/10/2017.
@@ -26,12 +29,19 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private static final String TAG = "RegistrationActivity";
 
-    public FirebaseAuth mAuth;
-    public FirebaseAuth.AuthStateListener mAuthListener;
-
+    private String userID;
+    private EditText newUserName;
     private EditText newUserEmail;
     private EditText newUserPassword;
     private Button btnCreateAccount;
+
+    public FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+
+
+    private boolean status = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +49,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.registration_activity);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
 
         if (mAuth.getCurrentUser() != null) {
             finish();
@@ -60,27 +73,35 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             }
         };
 
+        newUserName = (EditText) findViewById(R.id.newUserName);
         newUserEmail = (EditText) findViewById(R.id.newUserEmail);
         newUserPassword = (EditText) findViewById(R.id.newUserPassword);
         btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
 
         btnCreateAccount.setOnClickListener(this);
+
     }
 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnRegistration) {
-            registration(newUserEmail.getText().toString(), newUserPassword.getText().toString());
+        if (view.getId() == R.id.btnCreateAccount) {
+            registration(newUserName.getText().toString(), newUserEmail.getText().toString(), newUserPassword.getText().toString());
         }
-
     }
 
-    public void registration(String email, String password) {
+    public void registration(String name, String email, String password) {
+        Log.d(TAG, "onClick: Submit pressed.");
+        name = newUserName.getText().toString().trim();
         email = newUserEmail.getText().toString().trim();
         password  = newUserPassword.getText().toString().trim();
 
         //checking if email and passwords are empty
+        if(TextUtils.isEmpty(name)) {
+            Toast.makeText(this,"Please enter name",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
             return;
@@ -91,10 +112,18 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             return;
         }
 
+        final String finalName = name;
+        final String finalPassword = password;
+        final String finalEmail = email;
+
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    userID = user.getUid();
+                    User userInformation = new User(finalName, finalPassword, finalEmail,status);
+                    myRef.child("chatlight-69459").setValue(userInformation);
                     Toast.makeText(RegistrationActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

@@ -23,5 +23,5 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.sanke.ilafedoseev.talkchat", appContext.getPackageName());
     }
-    
+
 }

@@ -24,6 +24,19 @@
         />
 
     <EditText
+        android:id="@+id/newUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#8ba3f7"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:inputType="text"
+        android:padding="15dp"
+        android:hint="Your Name"
+        />
+
+    <EditText
         android:id="@+id/newUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

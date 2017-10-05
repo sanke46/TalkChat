@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sanke.ilafedoseev.talkchat.R;
@@ -32,7 +31,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         User user = usersFriends.get(position);
-        holder.id.setId(user.getId());
         holder.avatar.setText(user.getAvatarName(user.getName()));
         holder.name.setText(user.getName());
     }
@@ -43,13 +41,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout id;
         private TextView avatar;
         private TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            id = (LinearLayout) itemView.findViewById(R.id.idUser);
             avatar = (TextView) itemView.findViewById(R.id.avatar);
             name = (TextView) itemView.findViewById(R.id.name);
 

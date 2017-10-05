@@ -1,5 +1,6 @@
 package com.sanke.ilafedoseev.talkchat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -109,6 +110,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
+        ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -126,4 +132,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+
 }

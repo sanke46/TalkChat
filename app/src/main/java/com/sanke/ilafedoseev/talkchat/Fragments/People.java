@@ -1,6 +1,8 @@
 package com.sanke.ilafedoseev.talkchat.Fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,7 @@ public class People extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -35,13 +38,23 @@ public class People extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(mLayoutManager);
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         return view;
+
+
     }
 
     public List<User> implemets(List<User> arr) {
-        arr.add(new User(1,"Светлов Евгений","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(2,"Федосеев Илья","asdfasdf12","example@gmail.com",true));
-        arr.add(new User(3,"Анна Лазаренко","asdfasdf12","example@gmail.com",true));
+        arr.add(new User("Светлов Евгений","asdfasdf12","example@gmail.com",true));
+        arr.add(new User("Федосеев Илья","asdfasdf12","example@gmail.com",true));
+        arr.add(new User("Анна Лазаренко","asdfasdf12","example@gmail.com",true));
         return arr;
     }
 
