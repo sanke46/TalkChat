@@ -1,17 +1,19 @@
 package com.sanke.ilafedoseev.talkchat.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sanke.ilafedoseev.talkchat.Adapter.RecyclerViewAdapter;
+import com.sanke.ilafedoseev.talkchat.Adapters.FriendsRecyclerViewAdapter;
 import com.sanke.ilafedoseev.talkchat.R;
+import com.sanke.ilafedoseev.talkchat.UI.SearchActivity;
 import com.sanke.ilafedoseev.talkchat.User;
 
 import java.util.ArrayList;
@@ -34,18 +36,24 @@ public class People extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_people, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.allPeople);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(implemets(users));
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(implemets(users));
         recyclerView.setAdapter(adapter);
+        mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                startActivity(new Intent(getActivity(), SearchActivity.class));
             }
         });
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL));
+
         return view;
 
 

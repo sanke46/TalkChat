@@ -7,18 +7,21 @@
     tools:context="com.sanke.ilafedoseev.talkchat.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        app:elevation="0dp"
+        >
 
         <android.support.v7.widget.Toolbar
             android:theme="@style/AppTheme"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:elevation="20dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:background="@drawable/border_bottom"
+            app:elevation="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            style="@style/viewPagerTitleStrip"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -28,8 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@android:color/white" />
-    <include layout="@layout/content_main" />
+        android:background="#fff"/>
+    <include layout="@layout/content_main"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>

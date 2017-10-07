@@ -1,4 +1,4 @@
-package com.sanke.ilafedoseev.talkchat.Adapter;
+package com.sanke.ilafedoseev.talkchat.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.sanke.ilafedoseev.talkchat.Adapter.FragmentPageAdapter;
+import com.sanke.ilafedoseev.talkchat.Adapters.FragmentPageAdapter;
+import com.sanke.ilafedoseev.talkchat.UI.LoginActivity;
+import com.sanke.ilafedoseev.talkchat.UI.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        findViewById(R.id.appBarLayout).bringToFront();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new FragmentPageAdapter(getSupportFragmentManager(), MainActivity.this));
-
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
 
 //        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.allPeople);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-
+            startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.sign_out) {
             FirebaseAuth.getInstance().signOut();
             finish();

@@ -1,4 +1,4 @@
-package com.sanke.ilafedoseev.talkchat.Adapter;
+package com.sanke.ilafedoseev.talkchat.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,21 +15,21 @@ import java.util.List;
  * Created by ilafedoseev on 02/10/2017.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
-    private List<User> usersFriends;
+public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder>{
 
-    public RecyclerViewAdapter(List<User> people) {
+    private List<User> usersFriends;
+    public FriendsRecyclerViewAdapter(List<User> people) {
         this.usersFriends = people;
     }
 
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FriendsRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(FriendsRecyclerViewAdapter.ViewHolder holder, int position) {
         User user = usersFriends.get(position);
         holder.avatar.setText(user.getAvatarName(user.getName()));
         holder.name.setText(user.getName());

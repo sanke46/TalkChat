@@ -1,4 +1,4 @@
-package com.sanke.ilafedoseev.talkchat;
+package com.sanke.ilafedoseev.talkchat.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sanke.ilafedoseev.talkchat.MainActivity;
+import com.sanke.ilafedoseev.talkchat.R;
+import com.sanke.ilafedoseev.talkchat.User;
 
 
 /**
@@ -29,7 +32,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private static final String TAG = "RegistrationActivity";
 
-    private String userID;
     private EditText newUserName;
     private EditText newUserEmail;
     private EditText newUserPassword;
@@ -121,7 +123,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
-                    userID = user.getUid();
+                    String userID = user.getUid();
                     User userInformation = new User(finalName, finalPassword, finalEmail,status);
                     myRef.child("chatlight-69459").setValue(userInformation);
                     Toast.makeText(RegistrationActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();

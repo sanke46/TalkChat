@@ -8,7 +8,7 @@
         android:onClick="chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/avatar"
@@ -16,17 +16,35 @@
             android:background="@drawable/cycle_name"
             android:layout_width="wrap_content"
             android:textColor="#fff"
-            android:paddingTop="15dp"
-            android:paddingLeft="15dp"
+            android:paddingTop="17dp"
+            android:paddingLeft="17dp"
             android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/idUser"
+            android:onClick="chat"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/name"
             android:text="Eвшений Светлов"
             android:textSize="17dp"
+            android:layout_marginTop="0dp"
             android:layout_marginLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/email"
+            android:text="devil.ilya@gmail.com"
+            android:textSize="13dp"
+            android:textColor="#cacaca"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
