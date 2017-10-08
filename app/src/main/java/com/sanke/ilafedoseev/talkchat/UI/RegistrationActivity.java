@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sanke.ilafedoseev.talkchat.MainActivity;
 import com.sanke.ilafedoseev.talkchat.R;
-import com.sanke.ilafedoseev.talkchat.User;
+import com.sanke.ilafedoseev.talkchat.Model.User;
 
 
 /**
@@ -32,18 +32,18 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private static final String TAG = "RegistrationActivity";
 
+    // Registration input
     private EditText newUserName;
     private EditText newUserEmail;
     private EditText newUserPassword;
     private Button btnCreateAccount;
+    private boolean status = true;
 
+    // Firebase instance
     public FirebaseAuth mAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
-
-
-    private boolean status = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-
+        // Test of login user or not
         if (mAuth.getCurrentUser() != null) {
             finish();
             Log.v(TAG,"** USER arleady login **");
@@ -81,7 +81,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
 
         btnCreateAccount.setOnClickListener(this);
-
     }
 
 
@@ -92,7 +91,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /** Registration method */
     public void registration(String name, String email, String password) {
+
         Log.d(TAG, "onClick: Submit pressed.");
         name = newUserName.getText().toString().trim();
         email = newUserEmail.getText().toString().trim();
@@ -102,14 +103,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         if(TextUtils.isEmpty(name)) {
             Toast.makeText(this,"Please enter name",Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if(TextUtils.isEmpty(email)){
+        } else if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if(TextUtils.isEmpty(password)){
+        } else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
             return;
         }

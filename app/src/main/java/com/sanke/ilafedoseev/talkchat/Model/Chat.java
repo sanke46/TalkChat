@@ -1,10 +1,11 @@
-package com.sanke.ilafedoseev.talkchat;
+package com.sanke.ilafedoseev.talkchat.Model;
 
 /**
  * Created by ilafedoseev on 07/10/2017.
  */
 
 public class Chat {
+
     private String name;
     private String text;
     private String time;

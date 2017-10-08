@@ -28,10 +28,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.appBarLayout).bringToFront();
+//      findViewById(R.id.appBarLayout).bringToFront();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,15 +50,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-
-//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.allPeople);
+        // Test user already log in or not
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
-            Log.v(TAG,"** USER not arleady login **");
+            Log.v(TAG,"USER not already login");
             finish();
-           startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         } else {
-            Log.v(TAG,"** USER arleady login **");
+            Log.v(TAG,"User already login ");
         }
     }
 
@@ -73,19 +73,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.settings) {
@@ -104,9 +99,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.sign_out) {
             FirebaseAuth.getInstance().signOut();
             finish();
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
-            Log.v(TAG, "**User logOut**");
+            startActivity(new Intent(this, LoginActivity.class));
+            Log.v(TAG, "User log out**");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

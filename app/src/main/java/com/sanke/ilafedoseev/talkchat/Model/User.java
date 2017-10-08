@@ -1,10 +1,11 @@
-package com.sanke.ilafedoseev.talkchat;
+package com.sanke.ilafedoseev.talkchat.Model;
 
 /**
  * Created by ilafedoseev on 08/08/2017.
  */
 
 public class User {
+
     private String name;
     private String password;
     private String email;

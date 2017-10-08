@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sanke.ilafedoseev.talkchat.Chat;
+import com.sanke.ilafedoseev.talkchat.Model.Chat;
 import com.sanke.ilafedoseev.talkchat.R;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
     @Override
     public ChatRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friends, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycleview_chat, parent, false);
         return new ViewHolder(v);
     }
 
@@ -51,10 +51,10 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            avatar = (TextView) itemView.findViewById(R.id.avatarChat);
-            name = (TextView) itemView.findViewById(R.id.nameChat);
-            text = (TextView) itemView.findViewById(R.id.textChat);
-            time = (TextView) itemView.findViewById(R.id.timeCaht);
+            avatar = itemView.findViewById(R.id.avatarChat);
+            name = itemView.findViewById(R.id.nameChat);
+            text = itemView.findViewById(R.id.textChat);
+            time = itemView.findViewById(R.id.timeCaht);
         }
     }
 }

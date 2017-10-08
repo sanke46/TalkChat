@@ -30,13 +30,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final String TAG = "LoginActivity";
 
-    public FirebaseAuth mAuth;
-    public FirebaseAuth.AuthStateListener mAuthListener;
-
+    // Log in input
     private EditText emailUser;
     private EditText passwodUser;
     private Button btnLogin;
     private TextView btnRegistration;
+
+    // Firebase instances
+    public FirebaseAuth mAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,7 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /** Method of log in */
     public void singIn(String email, String password) {
+
         email = emailUser.getText().toString().trim();
         password  = passwodUser.getText().toString().trim();
 
@@ -105,18 +109,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if(TextUtils.isEmpty(password)){
+        } else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Authentication
         ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
+        // Test firebase successful
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
