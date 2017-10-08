@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sanke.ilafedoseev.talkchat.Fragments.Chat">
+    tools:context="com.sanke.ilafedoseev.talkchat.Fragments.ChatFragment">
 
-    <TextView
-        android:id="@+id/chat_text"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/allChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="asdfasdf"
-        android:gravity="center" />
+        android:layout_marginTop="104dp"
+        android:background="#f2f4f7"
+        android:scrollbars="vertical"/>
 
 </FrameLayout>

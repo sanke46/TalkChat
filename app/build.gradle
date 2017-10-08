@@ -40,17 +40,12 @@ dependencies {
     // more stuff, e.g., Mockito
 }
 
-dependencies {
-    compile 'com.google.firebase:firebase-core:10.2.1'
-    compile 'com.google.firebase:firebase-database:10.2.1'
-    compile 'com.google.firebase:firebase-storage:10.2.1'
-    compile 'com.google.firebase:firebase-crash:10.2.1'
-    compile 'com.google.firebase:firebase-auth:10.2.1'
-    compile 'com.google.firebase:firebase-messaging:10.2.1'
-    compile 'com.google.firebase:firebase-config:10.2.1'
-    compile 'com.google.firebase:firebase-invites:10.2.1'
-    compile 'com.google.firebase:firebase-ads:10.2.1'
-    compile 'com.google.firebase:firebase-appindexing:10.2.1'
-}
 
+
+dependencies {
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+}
+dependencies {
+    compile 'com.google.firebase:firebase-database:10.0.1'
+}
 apply plugin: 'com.google.gms.google-services'

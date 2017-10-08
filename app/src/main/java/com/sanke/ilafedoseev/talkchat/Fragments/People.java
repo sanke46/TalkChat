@@ -19,8 +19,8 @@ import com.sanke.ilafedoseev.talkchat.User;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class People extends Fragment {
+
     private List<User> users = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
 

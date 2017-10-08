@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.sanke.ilafedoseev.talkchat.Fragments.Chat;
+import com.sanke.ilafedoseev.talkchat.Fragments.ChatFragment;
 import com.sanke.ilafedoseev.talkchat.Fragments.People;
 
 /**
@@ -28,7 +28,7 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
         if (position == 0) {
            return new People();
         } else {
-            return new Chat();
+            return new ChatFragment();
         }
     }
 

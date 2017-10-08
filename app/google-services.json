@@ -8,50 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:41726158636:android:05c19818c1726e61",
-        "android_client_info": {
-          "package_name": "com.sanke.ilafedoseev.chatlight"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "41726158636-bll5jb9s720iso462o2vhjvme11o35f7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sanke.ilafedoseev.chatlight",
-            "certificate_hash": "b69c89434bd64ad17495ac148f1b868efd6aa85a"
-          }
-        },
-        {
-          "client_id": "41726158636-lq3bgkrrcuh7a0b10be6t9sbbh8n0b9n.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAevbigeouwWqV9JXfAuirXAC_WPkSuk2I"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "41726158636-lq3bgkrrcuh7a0b10be6t9sbbh8n0b9n.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:41726158636:android:a1a4a09f026ba6ed",
         "android_client_info": {
           "package_name": "com.sanke.ilafedoseev.talkchat"
