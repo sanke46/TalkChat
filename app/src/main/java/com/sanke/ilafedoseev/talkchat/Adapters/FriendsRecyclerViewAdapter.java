@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sanke.ilafedoseev.talkchat.Model.Friend;
 import com.sanke.ilafedoseev.talkchat.R;
-import com.sanke.ilafedoseev.talkchat.Model.User;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
 
 public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder>{
 
-    private List<User> usersFriends;
+    private List<Friend> usersFriends;
 
-    public FriendsRecyclerViewAdapter(List<User> people) {
+    public FriendsRecyclerViewAdapter(List<Friend> people) {
         this.usersFriends = people;
     }
 
@@ -31,7 +31,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
 
     @Override
     public void onBindViewHolder(FriendsRecyclerViewAdapter.ViewHolder holder, int position) {
-        User user = usersFriends.get(position);
+        Friend user = usersFriends.get(position);
         holder.avatar.setText(user.getAvatarName(user.getName()));
         holder.name.setText(user.getName());
     }

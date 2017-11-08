@@ -122,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
                     User userInformation = new User(finalName, finalPassword, finalEmail,status);
-                    myRef.child("chatlight-69459").setValue(userInformation);
+                    myRef.child(userID).setValue(userInformation);
                     Toast.makeText(RegistrationActivity.this, "Registration complete", Toast.LENGTH_SHORT).show();
                     finish();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

@@ -10,7 +10,6 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
         >
 
         <android.support.v7.widget.Toolbar
@@ -23,8 +22,8 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             style="@style/viewPagerTitleStrip"/>
 
-    </android.support.design.widget.AppBarLayout>
 
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -32,6 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="#fff"/>
+
+
     <include layout="@layout/content_main"
         />
 

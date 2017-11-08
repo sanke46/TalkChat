@@ -7,26 +7,48 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sanke.ilafedoseev.talkchat.Adapters.FriendsRecyclerViewAdapter;
+import com.sanke.ilafedoseev.talkchat.DateBase.DateFriends;
+import com.sanke.ilafedoseev.talkchat.Model.Friend;
 import com.sanke.ilafedoseev.talkchat.R;
 import com.sanke.ilafedoseev.talkchat.UI.SearchActivity;
-import com.sanke.ilafedoseev.talkchat.Model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PeopleFragment extends Fragment {
 
-    private List<User> users = new ArrayList<>();
+    private List<Friend> users = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
+    private DateFriends db;
+    private List<Friend> list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DateFriends(getActivity());
+
+        // Inserting Contacts
+        Log.d("Insert: ", "Inserting ..");
+//        db.addFriend(new Friend("Светлов Евгений","example@gmail.com"));
+//        db.addFriend(new Friend("Федосеев Илья","example@gmail.com"));
+//        db.addFriend(new Friend("Анна Лазаренко","example@gmail.com"));
+
+        list = db.getAllFriends();
+
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println(list.get(i));
+//        }
+
+//        db.deleteAll("Su");
+//        db.deleteAll("Pi");
+//        db.deleteAll("Dr");
+        System.out.println("DONE");
     }
 
     @Override
@@ -55,10 +77,12 @@ public class PeopleFragment extends Fragment {
     }
 
     // Test init
-    public List<User> implemets(List<User> arr) {
-        arr.add(new User("Светлов Евгений","asdfasdf12","example@gmail.com",true));
-        arr.add(new User("Федосеев Илья","asdfasdf12","example@gmail.com",true));
-        arr.add(new User("Анна Лазаренко","asdfasdf12","example@gmail.com",true));
+    public List<Friend> implemets(List<Friend> arr) {
+//      arr.add(new Friend("Светлов Евгений","example@gmail.com",true));
+//      arr.add(new Friend("Федосеев Илья","example@gmail.com",true));
+//      arr.add(new Friend("Анна Лазаренко","example@gmail.com",true));
+        arr = list;
+
         return arr;
     }
 
@@ -69,4 +93,11 @@ public class PeopleFragment extends Fragment {
         }
     }
 
+    public void addUsers(Friend newFriend) {
+        users.add(newFriend);
+    }
+
+    public List<Friend> getUsers() {
+        return users;
+    }
 }

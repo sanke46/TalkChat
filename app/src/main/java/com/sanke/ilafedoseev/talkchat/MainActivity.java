@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Test user already log in or not
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
-            Log.v(TAG,"USER not already login");
+            Log.v(TAG, "USER not already login");
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         } else {
-            Log.v(TAG,"User already login ");
+            Log.v(TAG, "User already login ");
         }
     }
 
@@ -107,6 +107,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 }
