@@ -4,7 +4,6 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:onClick="chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
@@ -22,7 +21,6 @@
         <LinearLayout
             android:layout_weight="1"
             android:id="@+id/idUser"
-            android:onClick="chat"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -47,7 +45,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
-            android:onClick="chat"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_weight="2.5"
