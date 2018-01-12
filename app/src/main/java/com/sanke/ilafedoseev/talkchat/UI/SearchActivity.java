@@ -38,7 +38,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         db = new DateFriends(getApplicationContext());
 
-
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         myRef.addValueEventListener(new ValueEventListener() {
@@ -56,8 +55,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
-
         final EditText editText = (EditText) findViewById(R.id.findFriend);
         Button button = (Button) findViewById(R.id.button_search);
 
@@ -73,7 +70,6 @@ public class SearchActivity extends AppCompatActivity {
     public void checkUser(List<String> list, String email) {
         for (String s : list) {
             if (s.equals(email)) {
-                db.deletAll();
                 db.addFriend(new Friend("New Friend", s));
                 startActivity(new Intent(this, MainActivity.class));
                 break;
@@ -90,7 +86,5 @@ public class SearchActivity extends AppCompatActivity {
             System.out.println(f.getName());
         }
     }
-
-
 
 }

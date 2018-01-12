@@ -15,7 +15,7 @@ import java.util.List;
  * Created by ilafedoseev on 02/10/2017.
  */
 
-public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder> {
+public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder>{
 
     private List<Friend> usersFriends;
 
@@ -34,7 +34,6 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
         Friend user = usersFriends.get(position);
         holder.avatar.setText(user.getAvatarName(user.getName()));
         holder.name.setText(user.getName());
-        holder.email.setText(user.getEmail());
     }
 
     @Override
@@ -45,21 +44,11 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView avatar;
         private TextView name;
-        private TextView email;
 
         public ViewHolder(View itemView) {
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar);
             name = itemView.findViewById(R.id.name);
-            email = itemView.findViewById(R.id.email);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int itemPosition = getLayoutPosition();
-                    System.out.println(itemPosition);
-                }
-
-            });
         }
     }
 }
