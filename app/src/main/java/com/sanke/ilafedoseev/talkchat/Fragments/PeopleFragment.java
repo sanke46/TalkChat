@@ -1,9 +1,12 @@
 package com.sanke.ilafedoseev.talkchat.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,10 +26,12 @@ import java.util.List;
 
 public class PeopleFragment extends Fragment {
 
+    public static final String DETAIL_FRIENDS_FRAGMENT = "fragment_detail_friend";
     private List<Friend> users = new ArrayList<>();
     protected RecyclerView.LayoutManager mLayoutManager;
     private DateFriends db;
     private List<Friend> list;
+    private FragmentActivity myContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,31 @@ public class PeopleFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        myContext = (FragmentActivity) context;
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_people, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.allPeople);
-        FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(implemets(users));
+        FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(implemets(users), new FriendsRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public void onClick(int index) {
+//                Toast.makeText(getActivity(), list.get(index).getName(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "ghbdtn", Toast.LENGTH_SHORT).show();
+                DetailFriendFragment detailFriendFragment = new DetailFriendFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(DetailFriendFragment.KEY_DETAIL, list.get(index).getName());
+                detailFriendFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = myContext.getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.placeholder, detailFriendFragment, DETAIL_FRIENDS_FRAGMENT);
+//                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -76,6 +101,8 @@ public class PeopleFragment extends Fragment {
         return view;
     }
 
+
+
     // Test init
     public List<Friend> implemets(List<Friend> arr) {
 //      arr.add(new Friend("Светлов Евгений","example@gmail.com",true));
@@ -86,12 +113,6 @@ public class PeopleFragment extends Fragment {
         return arr;
     }
 
-    public class chatCreat implements View.OnClickListener {
-        @Override
-        public void onClick(final View v) {
-
-        }
-    }
 
     public void addUsers(Friend newFriend) {
         users.add(newFriend);

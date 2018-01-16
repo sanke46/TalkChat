@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             Log.v(TAG, "User already login ");
         }
+
     }
 
     @Override
@@ -108,4 +109,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+//    @Override
+//    public void onClick(int index) {
+//        Toast.makeText(MainActivity.this, "ghbdtn", Toast.LENGTH_SHORT);
+//        DetailFriendFragment detailFriendFragment = new DetailFriendFragment();
+//        Bundle bundle = new Bundle();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.drawer_layout, detailFriendFragment, DETAIL_FRIENDS_FRAGMENT);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 }

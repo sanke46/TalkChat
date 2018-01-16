@@ -11,15 +11,18 @@ import com.sanke.ilafedoseev.talkchat.R;
 
 import java.util.List;
 
-/**
- * Created by ilafedoseev on 02/10/2017.
- */
 
 public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder>{
 
-    private List<Friend> usersFriends;
+    public interface ItemClickListener {
+        void onClick(int index);
+    }
 
-    public FriendsRecyclerViewAdapter(List<Friend> people) {
+    private List<Friend> usersFriends;
+    private ItemClickListener mItemClickListener;
+
+    public FriendsRecyclerViewAdapter(List<Friend> people, ItemClickListener itemClickListener) {
+        this.mItemClickListener = itemClickListener;
         this.usersFriends = people;
     }
 
@@ -31,10 +34,10 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
 
     @Override
     public void onBindViewHolder(FriendsRecyclerViewAdapter.ViewHolder holder, int position) {
-        Friend user = usersFriends.get(position);
-        holder.avatar.setText(user.getAvatarName(user.getName()));
-        holder.name.setText(user.getName());
+        holder.bindView(usersFriends.get(position), position);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -42,6 +45,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private int index;
         private TextView avatar;
         private TextView name;
 
@@ -49,6 +53,18 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar);
             name = itemView.findViewById(R.id.name);
+        }
+
+        public void bindView(final Friend ff, int position) {
+            index = position;
+            avatar.setText(ff.getAvatarName(ff.getName()));
+            name.setText(ff.getName());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mItemClickListener.onClick(index);
+                }
+            });
         }
     }
 }
