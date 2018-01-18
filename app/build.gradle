@@ -50,4 +50,7 @@ dependencies {
 dependencies {
     implementation 'com.google.firebase:firebase-auth:11.0.4'
 }
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
 apply plugin: 'com.google.gms.google-services'

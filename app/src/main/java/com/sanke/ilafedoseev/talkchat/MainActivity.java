@@ -16,8 +16,8 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sanke.ilafedoseev.talkchat.Adapters.FragmentPageAdapter;
+import com.sanke.ilafedoseev.talkchat.UI.ChatOpenActivity;
 import com.sanke.ilafedoseev.talkchat.UI.LoginActivity;
-import com.sanke.ilafedoseev.talkchat.UI.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(new Intent(this, ChatOpenActivity.class));
         } else if (id == R.id.sign_out) {
             FirebaseAuth.getInstance().signOut();
             finish();

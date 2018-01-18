@@ -77,8 +77,8 @@ public class PeopleFragment extends Fragment {
                 bundle.putString(DetailFriendFragment.KEY_DETAIL, list.get(index).getName());
                 detailFriendFragment.setArguments(bundle);
                 FragmentTransaction fragmentTransaction = myContext.getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.placeholder, detailFriendFragment, DETAIL_FRIENDS_FRAGMENT);
-//                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.drawer_layout, detailFriendFragment, DETAIL_FRIENDS_FRAGMENT);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });

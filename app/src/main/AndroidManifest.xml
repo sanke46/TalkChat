@@ -28,7 +28,8 @@
             android:label="Registration"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UI.SettingsActivity" />
-        <activity android:name=".UI.SearchActivity"></activity>
+        <activity android:name=".UI.SearchActivity" />
+        <activity android:name=".UI.ChatOpenActivity"></activity>
     </application>
 
 </manifest>

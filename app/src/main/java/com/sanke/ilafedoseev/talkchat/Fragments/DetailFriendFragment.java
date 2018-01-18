@@ -14,7 +14,7 @@ import com.sanke.ilafedoseev.talkchat.R;
 
 public class DetailFriendFragment extends Fragment {
 
-    public static final String KEY_DE1TAIL = "fiend_index";
+    public static final String KEY_DETAIL = "fiend_index";
     private TextView textView;
 
     @Override

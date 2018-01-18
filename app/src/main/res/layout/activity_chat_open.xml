@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messageRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editMessage"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="3"
+            android:gravity="top|left"
+            android:maxLines="5"
+            android:layout_gravity= "center_vertical|center_horizontal"
+            android:textColor="#333"
+            android:layout_weight="5"
+            android:background="#fff"
+            android:scrollHorizontally="false" />
+
+        <Button
+            android:id="@+id/buttonSend"
+            android:text='>'
+            android:gravity="center"
+            android:layout_gravity= "center_vertical|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:background="#ddd" />
+
+    </LinearLayout>
+</LinearLayout>
